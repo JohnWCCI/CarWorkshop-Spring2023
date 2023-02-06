@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace CarWorkshop
+﻿namespace CarWorkshop
 {
     /// <summary>
     /// Abstraction - making a generic class that can be inherited by children classes by lending functionality
@@ -40,6 +38,21 @@ namespace CarWorkshop
         /// </summary>
         public abstract void MakeSound();
 
+
+        /// <summary>
+        /// Is the Car running
+        /// </summary>
+        public bool IsRunning => this.Speed > 0;
+
+        /// <summary>
+        /// Distance Traveled
+        /// </summary>
+        public int Traveled { get; set; }
+
+        /// <summary>
+        /// Distance to travel
+        /// </summary>
+        public int Distance { get; set; }
         /// <summary>
         /// Get a Random Color
         /// </summary>
@@ -61,6 +74,22 @@ namespace CarWorkshop
         }
 
         /// <summary>
+        /// Tick Method to move the Vehicle
+        /// </summary>
+        public void Tick()
+        {
+            if (this.IsRunning)
+            {
+                this.Traveled = this.Traveled + this.Speed;
+                if (this.Traveled >= this.Distance)
+                {
+                    this.Traveled = 0;
+                    this.Speed = 0;
+                    MakeSound();
+                }
+            }
+        }
+        /// <summary>
         /// Clears the screen and displays a prompt
         /// </summary>
         /// <param name="prompt"></param>
@@ -69,7 +98,7 @@ namespace CarWorkshop
             Console.Clear();
             Console.WriteLine("Type EXIT to quit");
             Console.WriteLine();
-            if(!string.IsNullOrEmpty(prompt))
+            if (!string.IsNullOrEmpty(prompt))
             {
                 Console.WriteLine(prompt);
             }
@@ -97,9 +126,9 @@ namespace CarWorkshop
                 var line = Console.ReadLine();
 
                 // check if the user wants to exit
-                if(line is not null && line.ToUpper() == "EXIT")
+                if (line is not null && line.ToUpper() == "EXIT")
                 {
-                   Environment.Exit(0);  
+                    Environment.Exit(0);
                 }
                 // checks input for value
                 if (line != null)

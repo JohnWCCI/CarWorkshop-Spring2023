@@ -23,14 +23,6 @@ namespace CarWorkShopTest
         {
             Assert.Less(GetCar.Cost, 15000);
         }
-
-        
-
-        [Test]
-        public void Model()
-        {
-
-            Assert.Pass();
-        }
+       
     }
 }

@@ -20,9 +20,10 @@ namespace CarWorkshop
             Brand = RandomBrand();
             Color = RandomColor(); 
             Speed = 0;
-            TopSpeed = 50;
+            TopSpeed = Vehicle.random.Next(5,50);
             Cost = random.Next(100, 500);
             
+
         }
 
         /// <summary>
@@ -39,6 +40,7 @@ namespace CarWorkshop
             Speed = 0;
             TopSpeed = topSpeed;
             Cost = cost;
+            
         }
 
         /// <summary>
@@ -70,7 +72,16 @@ namespace CarWorkshop
         /// </summary>
         public override string Display()
         {
-            return $"Type: Bike - Brand: {Brand} - Color: {Color} - Cost: {Cost}";
+            string message = "";
+            if(IsRunning)
+            {
+                message = $" - Traveling {this.Traveled}  at  {this.Speed}";
+            }
+            else
+            {
+                message = $"- Is Running {IsRunning}";
+            }
+            return $"Type: Bike - Brand: {Brand} - Color: {Color} - Cost: {Cost}  {message}";
         }
 
         /// <summary>
@@ -87,6 +98,16 @@ namespace CarWorkshop
         /// <returns></returns>
         public override string ToString()
         {
+            string message = "";
+            if (IsRunning)
+            {
+                message = $"\n Traveling {this.Traveled}  at  {this.Speed}";
+            }
+            else
+            {
+                message = $"\n Is Running {IsRunning}";
+            }
+
             return $"Brand: {Brand} \nTop Speed: {TopSpeed} \nCost: {Cost}\nColor {Color}";
         }
     }

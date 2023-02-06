@@ -25,10 +25,7 @@ namespace CarWorkshop
         /// </summary>
         public string Model { get; set; } = null!;
 
-        /// <summary>
-        /// Is the Car running
-        /// </summary>
-        public bool IsRunning { get; set; } = false;
+       
        
         /// <summary>
         /// Default Constructor
@@ -39,9 +36,8 @@ namespace CarWorkshop
             Make = RandomMake();
             Model = RandomModel();
             Speed = 0;
-            TopSpeed = 150;
+            TopSpeed = Vehicle.random.Next(50, 150);
             Cost = random.Next(5000, 15000); 
-            IsRunning = false;
             Color = RandomColor();
             
         }
@@ -62,7 +58,7 @@ namespace CarWorkshop
             TopSpeed = topspeed;
             Color = color;
             Cost = cost;
-            IsRunning = false;
+           
         }
 
         /// <summary>
@@ -105,7 +101,16 @@ namespace CarWorkshop
         /// </summary>
         public override string Display()
         {
-           return $"Type: Car - Make: {Make} - Model: {Model} - Color: {Color} - Cost: {Cost}";
+            string message = "";
+            if (IsRunning)
+            {
+                message = $" - Traveling {this.Traveled} at {this.Speed}";
+            }
+            else
+            {
+                message = $" - Is Running {IsRunning}";
+            }
+            return $"Type: Car - Make: {Make} - Model: {Model} - Color: {Color} - Cost: {Cost} {message}";
         }
 
         /// <summary>
@@ -114,7 +119,7 @@ namespace CarWorkshop
         public override void MakeSound()
         {
             Console.WriteLine("HONK!!!");
-            Console.Beep();
+          
         }
 
         /// <summary>
@@ -123,7 +128,16 @@ namespace CarWorkshop
         /// <returns>String that can be use to disply this car.</returns>
         public override string ToString()
         {
-            return $"Make: {Make} \nModel: {Model} \nTop Speed: {TopSpeed} \nCost: {Cost} \nColor {Color}";
+            string message = "";
+            if (IsRunning)
+            {
+                message = $"\n Traveling {this.Traveled} at {this.Speed}";
+            }
+            else
+            {
+                message = $"\n Is Running {IsRunning}";
+            }
+            return $"Make: {Make} \nModel: {Model} \nTop Speed: {TopSpeed} \nCost: {Cost} \nColor {Color}{message}";
         }
     }
 }
